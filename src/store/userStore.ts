@@ -9,6 +9,9 @@ interface UserState {
   setLoading: (loading: boolean) => void;
   setLanguage: (lang: 'ko' | 'en') => void;
   updateStats: (newStats: Partial<User['stats']>) => void;
+  addInventoryItem: (itemId: string) => void;
+  setEquippedWeapon: (itemId: string | null) => void;
+  addScore: (points: number) => void;
 }
 
 export const useUserStore = create<UserState>((set) => ({
@@ -27,6 +30,33 @@ export const useUserStore = create<UserState>((set) => ({
         ? {
             ...state.user,
             stats: { ...state.user.stats, ...newStats },
+          }
+        : null,
+    })),
+  addInventoryItem: (itemId) =>
+    set((state) => ({
+      user: state.user
+        ? {
+            ...state.user,
+            inventory: [...(state.user.inventory || []), itemId],
+          }
+        : null,
+    })),
+  setEquippedWeapon: (itemId) =>
+    set((state) => ({
+      user: state.user
+        ? {
+            ...state.user,
+            equippedWeaponId: itemId,
+          }
+        : null,
+    })),
+  addScore: (points) =>
+    set((state) => ({
+      user: state.user
+        ? {
+            ...state.user,
+            totalScore: (state.user.totalScore || 0) + points,
           }
         : null,
     })),

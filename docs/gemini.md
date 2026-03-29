@@ -35,7 +35,9 @@
 ### 2.1 기술 스택
 - **Frontend:** React (Vite), TypeScript, Tailwind CSS, Framer Motion
 - **Backend/DB:** Firebase (Auth, Firestore, Storage)
-- **AI Integration:** OpenAI API 또는 Google Gemini API (난이도 분석 및 몬스터 생성)
+- **AI Integration:** Google Gemini API (Strict Versioning)
+  - **CRITICAL:** Use ONLY `gemini-3-flash-preview` or `gemini-2.5-flash`. 
+  - **FORBIDDEN:** Never use `gemini-1.5-flash`, `gemini-2.0-flash`, or any other version.
 - **State:** Zustand (유저 정보, 인벤토리, 현재 장비 상태 관리)
 
 ### 2.2 데이터 구조 (Firestore)

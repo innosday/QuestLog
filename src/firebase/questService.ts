@@ -1,8 +1,6 @@
 import {
   collection,
   addDoc,
-  updateDoc,
-  deleteDoc,
   doc,
   query,
   where,
@@ -18,6 +16,8 @@ import { db, storage } from './config';
 import { DIFFICULTY_POINTS, CATEGORY_LABELS } from '../types';
 import type { Quest, User } from '../types';
 import { getRandomLoot, WEAPON_DATABASE } from '../data/items';
+import { useUserStore } from '../store/userStore';
+import { useQuestStore } from '../store/questStore';
 
 const QUESTS_COLLECTION = 'quests';
 const USERS_COLLECTION = 'users';
@@ -89,14 +89,14 @@ export const completeQuest = async (quest: Quest, proofPhotoURL?: string) => {
     
     // 3. Update Quest Status
     const questRef = doc(db, QUESTS_COLLECTION, quest.qid);
-    const questUpdates: any = { status: 'success' };
+    const questUpdates: Partial<Quest> = { status: 'success' };
     if (proofPhotoURL) questUpdates.proofPhotoURL = proofPhotoURL;
     if (loot) questUpdates.lootDropped = true;
     batch.update(questRef, questUpdates);
 
     // 4. Update User Stats, Score, and Inventory
     const statKey = CATEGORY_LABELS[quest.category].stat;
-    const userUpdates: any = {
+    const userUpdates: Record<string, any> = {
       totalScore: increment(points),
       [`stats.${statKey}`]: increment(1),
     };
@@ -108,6 +108,16 @@ export const completeQuest = async (quest: Quest, proofPhotoURL?: string) => {
     batch.update(userRef, userUpdates);
 
     await batch.commit();
+
+    // 5. Update Local State (Zustand Stores)
+    const { addScore, updateStats, addInventoryItem } = useUserStore.getState();
+    const { updateQuest } = useQuestStore.getState();
+
+    addScore(points);
+    updateStats({ [statKey]: (userData.stats[statKey] || 0) + 1 });
+    if (loot) addInventoryItem(loot.id);
+    updateQuest(quest.qid, questUpdates);
+
     return loot; // Return loot so UI can show a popup
   } catch (error) {
     console.error('Error completing quest:', error);

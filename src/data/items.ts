@@ -24,6 +24,16 @@ export const WEAPON_DATABASE: Item[] = [
   { id: 'dex_w1', name: 'Precision Tweezers', grade: 'Common', statType: 'DEX', bonusValue: 5, description: 'Small but steady.' },
   { id: 'dex_w2', name: 'Sonic Tuner Blade', grade: 'Rare', statType: 'DEX', bonusValue: 25, description: 'Vibrates with perfect frequency.' },
   { id: 'dex_w3', name: 'Clockwork God\'s Dagger', grade: 'Legendary', statType: 'DEX', bonusValue: 100, description: 'Moves faster than time itself.' },
+
+  // CHA Weapons
+  { id: 'cha_w1', name: 'Polished Mirror', grade: 'Common', statType: 'CHA', bonusValue: 5, description: 'Reflects your inner confidence.' },
+  { id: 'cha_w2', name: 'Siren\'s Silver Tongue', grade: 'Rare', statType: 'CHA', bonusValue: 25, description: 'Persuasion becomes second nature.' },
+  { id: 'cha_w3', name: 'Crown of Eternal Charisma', grade: 'Legendary', statType: 'CHA', bonusValue: 100, description: 'The world falls under your spell.' },
+
+  // ECO Weapons
+  { id: 'eco_w1', name: 'Sturdy Bamboo Staff', grade: 'Common', statType: 'ECO', bonusValue: 5, description: 'A flexible and eco-friendly tool.' },
+  { id: 'eco_w2', name: 'Nature\'s Heart Shield', grade: 'Rare', statType: 'ECO', bonusValue: 25, description: 'Grows stronger with every good deed.' },
+  { id: 'eco_w3', name: 'World-Tree Branch', grade: 'Legendary', statType: 'ECO', bonusValue: 100, description: 'Restores the balance of the universe.' },
 ];
 
 export const getRandomLoot = (grade: Difficulty, category: Category): Item | null => {

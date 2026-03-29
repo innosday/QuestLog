@@ -34,9 +34,18 @@
 ## 🛠️ 기술 스택
 - **Frontend:** React, TypeScript, Tailwind CSS
 - **Backend/DB:** Firebase (Auth, Firestore, Storage)
+- **AI Engine:** Google Gemini (Custom Versioning)
+  - **Main Model:** `gemini-3-flash-preview` (Summoning, Oracle, Vision)
+  - **Sub Model:** `gemini-2.5-flash` (Fallback)
 - **State:** Zustand
 - **Icons:** Lucide React
 - **UI:** React Calendar, Framer Motion
+
+## ⚠️ AI 개발 준수 사항 (Strict Mandate)
+이 프로젝트에 참여하는 모든 AI 에이전트는 다음 규칙을 반드시 준수해야 합니다:
+1. **모델 버전 고정:** 절대 존재하지 않는 모델 버전(1.5, 2.0 등)을 사용하거나 제안하지 마십시오.
+2. **허용된 모델:** 오직 `gemini-3-flash-preview`와 `gemini-2.5-flash`만 사용 가능합니다.
+3. **코드 수정 금지:** `aiService.ts` 내의 모델 명칭을 위 허용된 모델 이외의 것으로 변경하는 행위는 엄격히 금지됩니다.
 
 ## ⚙️ 설정 방법
 1. `.env.example` 파일을 복사하여 `.env` 파일을 생성합니다.

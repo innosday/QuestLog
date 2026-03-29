@@ -102,7 +102,7 @@ export const listenToAuth = (callback: (user: User | null) => void) => {
 
       if (firebaseUser) {
         // Ensure user document exists in Firestore
-        let userData = await syncUserToFirestore(firebaseUser);
+        const userData = await syncUserToFirestore(firebaseUser);
         
         // Initial callback with data from sync
         callback(userData);

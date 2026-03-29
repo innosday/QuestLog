@@ -21,6 +21,7 @@ export interface User {
   photoURL?: string;
   inventory?: string[]; // array of item IDs
   equippedWeaponId?: string;
+  itemLevels?: Record<string, number>; // itemId -> level
 }
 
 export interface Quest {
@@ -43,6 +44,7 @@ export interface Quest {
   // AI Monster Metadata
   monsterName?: string;
   monsterDescription?: string;
+  monsterImageUrl?: string;
   level?: number;
   lootDropped?: boolean;
 }
@@ -53,6 +55,7 @@ export interface MonsterData {
   grade: Difficulty;
   level: number;
   category: Category;
+  monsterImageUrl?: string;
 }
 
 export const DIFFICULTY_POINTS: Record<Difficulty, number> = {

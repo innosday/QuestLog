@@ -131,6 +131,9 @@ const VerifyQuestModal: React.FC<VerifyQuestModalProps> = ({ quest, onClose }) =
                   <p className="text-slate-500 font-bold">You found a rare treasure while hunting.</p>
                 </div>
                 <div className="p-6 rounded-3xl bg-slate-50 border border-yellow-200">
+                  <div className="w-20 h-20 bg-white rounded-2xl mx-auto mb-4 flex items-center justify-center p-3 shadow-inner border border-yellow-100">
+                    <img src={`https://api.dicebear.com/7.x/shapes/svg?seed=${loot.id}&backgroundColor=ffffff`} alt="" className="w-full h-full object-contain" />
+                  </div>
                   <div className="text-yellow-600 font-black text-[10px] uppercase tracking-widest mb-1">{loot.grade} Weapon</div>
                   <h3 className="text-xl font-black text-slate-900 mb-2">{loot.name}</h3>
                   <div className="text-emerald-600 font-bold text-sm">+{loot.bonusValue} {loot.statType} Affinity</div>

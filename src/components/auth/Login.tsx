@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { loginWithGoogle, loginWithEmail, signupWithEmail, resetPassword } from '../../firebase/auth';
 import logoImg from '../../assets/questlog-logo.png';
-import { Shield, Sparkles, Sword, Target, Zap, Trophy, Mail, Lock, User, ArrowRight, RotateCw } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, RotateCw } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
     setGoogleLoading(true);
     try {
       await loginWithGoogle();
-    } catch (error) {
+    } catch {
       alert('구글 로그인에 실패했습니다.');
     } finally {
       setGoogleLoading(false);
@@ -31,8 +31,9 @@ const Login: React.FC = () => {
     try {
       await resetPassword(email);
       alert('비밀번호 재설정 이메일이 발송되었습니다.');
-    } catch (error: any) {
-      alert(error.message || '요청에 실패했습니다.');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : '요청에 실패했습니다.';
+      alert(message);
     }
   };
 
@@ -46,8 +47,9 @@ const Login: React.FC = () => {
       } else {
         await loginWithEmail(email, password);
       }
-    } catch (error: any) {
-      alert(error.message || '인증에 실패했습니다.');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : '인증에 실패했습니다.';
+      alert(message);
     } finally {
       setLoading(false);
     }
